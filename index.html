@@ -9,26 +9,39 @@
         </style>
     </head>
     <body>
-        <div id = 'container'></div>
+        <div id = 'container' onkeypress = 'doMove(event)'></div>
         <script src ='src/kinetic-v4.5.1.js'></script>
         <script type='text/javascript'>
+            var STAGE_WIDTH = 400;
+            var STAGE_HEIGHT= 400
             var stage = new Kinetic.Stage({
                 container:'container',
-                width: 578,
-                height: 200
+                width: STAGE_WIDTH,
+                height: STAGE_HEIGHT
                 });
             var layer = new Kinetic.Layer();
             var circle = new Kinetic.Circle({
-                x: stage.getWidth() / 2,
-                y: stage.getHeight() / 2,
-                radius: 70,
+                x: stage.getWidth()/2,
+                y: stage.getHeight()/5,
+                radius: 20,
                 fill: 'red',
                 strong: 'black',
-                strokeWidth:4
+                strokeWidth:1
                 });
 
             layer.add(circle);
             stage.add(layer);
+            var fall = new Kinetic.Animation(function(frame){
+                circle.setY(circle.getY()+5);
+                if(circle.getY()=== STAGE_HEIGHT-circle.getRadius()){
+                     fall.stop();
+                     }
+                 }, layer);
+            fall.start();
+           console.log(document); 
+            function doMove(e){
+                console.log(e.keyCode);
+            }
         </script>
     </body>
 </html>
